@@ -32,7 +32,7 @@ const LoginForm = () => {
 				<div className="mt-12 w-full md:w-2/3 mx-auto">
 					<Button type="button">Signup</Button>
 				</div>
-				<Link className="mt-4 w-max mx-auto block text-center text-sm hover:underline text-primary-color" to="/forgot-password">Forgot password? click here</Link>
+				<Link className="mt-4 w-max mx-auto block text-center text-sm hover:underline" to="/forgot-password">Forgot password? click here</Link>
 			</form>
 		</>
 	);
