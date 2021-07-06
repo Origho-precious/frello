@@ -11,7 +11,7 @@ const SignupForm = () => {
 		<>
 			<h2 className="text-2xl text-center">Create a free frello account</h2>
 			<form className="mt-10">
-				<div className="w-2/3 mx-auto">
+				<div className="w-full md:w-2/3 mx-auto">
 					<Input
 						onChange={(e) => setName(e.target.value)}
 						name="name"
@@ -20,7 +20,7 @@ const SignupForm = () => {
 						value={name}
 					/>
 				</div>
-				<div className="my-8 w-2/3 mx-auto">
+				<div className="my-8 w-full md:w-2/3 mx-auto">
 					<Input
 						onChange={(e) => setEmail(e.target.value)}
 						name="email"
@@ -29,7 +29,7 @@ const SignupForm = () => {
 						value={email}
 					/>
 				</div>
-				<div className="w-2/3 mx-auto">
+				<div className="w-full md:w-2/3 mx-auto">
 					<Input
 						onChange={(e) => setPassword(e.target.value)}
 						name="password"
@@ -38,7 +38,7 @@ const SignupForm = () => {
 						value={password}
 					/>
 				</div>
-				<div className="mt-12 w-2/3 mx-auto">
+				<div className="mt-12 w-full md:w-2/3 mx-auto">
 					<Button type="button">Signup</Button>
 				</div>
 			</form>

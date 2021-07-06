@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useSpring, animated, to } from "react-spring";
+import { useSpring, animated } from "react-spring";
 import LoginForm from "../../components/composed/LoginForm/LoginForm";
 import SignupForm from "../../components/composed/SignupForm/SignupForm";
 import TabNav from "../../components/composed/TavNav/Tabnav";
@@ -17,11 +17,11 @@ const Homepage = () => {
 	});
 
 	return (
-		<Wrapper className="flex">
-			<section className="section-1 w-2/5 py-4 h-full px-20">
+		<Wrapper className="flex md:overflow-hidden md:flex-row flex-col">
+			<section className="section-1 md:w-1/2 lg:w-2/5 pt-4 pb-16 h-full px-8 sm:px-28 md:px-10 lg:px-20">
 				<h3 className="text-3xl font-black logo">Frello</h3>
-				<div className="mt-20">
-					<h2 className="text-5xl mb-4">
+				<div className="mt-12 md:mt-20">
+					<h2 className="text-4xl sm:text-5xl mb-4">
 						Frello is a{" "}
 						<a
 							className="opacity-60"
@@ -33,7 +33,7 @@ const Homepage = () => {
 						</a>{" "}
 						clone.
 					</h2>
-					<p className="text-base tracking-wide">
+					<p className="text-sm sm:text-base tracking-wide">
 						built with Nodejs, Reactjs with TS, Redux, MongoDB and Express.
 						Using Socket.io for realtime updates on the board.
 					</p>
@@ -54,8 +54,8 @@ const Homepage = () => {
 					</ul>
 				</div>
 			</section>
-			<section className="section-2 mt-16 flex flex-col w-3/5">
-				<article className="w-2/3 mx-auto">
+			<section className="section-2 mt-16 flex flex-col md:w-1/2 lg:w-3/5">
+				<article className="md:w-5/6 mb-12 form-section mx-auto">
 					<TabNav
 						setIndex={setIndex}
 						index={index}
@@ -67,28 +67,40 @@ const Homepage = () => {
 						>
 							<LoginForm />
 						</animated.div>
-						<animated.div style={styles1}>
+						<animated.div
+							style={{ ...styles1, display: index !== 1 ? "none" : "block" }}
+						>
 							<SignupForm />
 						</animated.div>
 					</div>
 				</article>
 			</section>
-			<section></section>
 		</Wrapper>
 	);
 };
 
 const Wrapper = styled.article`
 	height: 100vh;
-	overflow: hidden;
 
-	.section-1 {
+	& .section-1 {
 		background: #0050d6;
 		color: #fff;
 
-		.logo {
+		& .logo {
 			color: #293856;
 			font-family: "Cousine", monospace;
+		}
+	}
+
+	& .section-2 {
+		& .form-section {
+			@media screen and (max-width: 767px) {
+				width: 70%;
+			}
+
+			@media screen and (max-width: 400px) {
+				width: 80%;
+			}
 		}
 	}
 `;

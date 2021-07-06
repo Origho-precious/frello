@@ -39,19 +39,19 @@ const Container = styled.button`
 	background: linear-gradient(
 		315deg,
 		hsla(218, 100%, 42%, 1) 0%,
-		hsla(218, 100%, 42%, 0.6) 10%
+		hsla(218, 100%, 42%, 0.6) 30%
 	);
 
 	background: -moz-linear-gradient(
 		315deg,
 		hsla(218, 100%, 42%, 1) 0%,
-		hsla(218, 100%, 42%, 0.6) 10%
+		hsla(218, 100%, 42%, 0.6) 30%
 	);
 
 	background: -webkit-linear-gradient(
 		315deg,
 		hsla(218, 100%, 42%, 1) 0%,
-		hsla(218, 100%, 42%, 0.6) 10%
+		hsla(218, 100%, 42%, 0.6) 30%
 	);
 
 	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#0050D6", endColorstr="#0050D6", GradientType=1 );

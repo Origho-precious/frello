@@ -17,3 +17,7 @@ button:focus {
 	border: none !important;
 	outline: none !important;
 }
+
+.primary-color {
+	color: hsla(218, 100%, 42%, 1);
+}
