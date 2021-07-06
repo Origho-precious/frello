@@ -11,6 +11,7 @@ const TabNav: React.FC<ITabNav> = ({ index, setIndex, options }) => {
 		<TabWrapper className="grid grid-cols-2 gap-20 w-full">
 			{options.map((option, idx) => (
 				<span
+					key={option}
 					className={idx === index ? "text-lg" : "opacity-30 text-lg"}
 					role="button"
 					onClick={() => setIndex(idx)}
