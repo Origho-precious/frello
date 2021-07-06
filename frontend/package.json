@@ -20,6 +20,7 @@
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3",
 		"react-sortablejs": "^6.0.0",
+		"react-spring": "^9.2.3",
 		"reduxjs-toolkit-persist": "^7.0.1",
 		"sortablejs": "^1.13.0",
 		"styled-components": "^5.3.0",
