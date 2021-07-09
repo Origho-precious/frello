@@ -3,6 +3,7 @@ import colors from "colors";
 import dotenv from "dotenv";
 import connectDB from "./configs/db.js";
 import { errorHandler, notFound } from "./middlewares/error.middleware.js";
+import userRoutes from "./routes/user.route.js";
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ connectDB();
 const app = express();
 
 app.use(express.json());
+
+app.use("/api/users", userRoutes);
 
 app.use("/", (req, res) => {
 	res.send(`API running on port ${process.env.PORT}`);
