@@ -42,3 +42,7 @@ export const authenticateUser = asyncHandler(async (req, res, next) => {
 		});
 	}
 });
+
+// export const verifyEmail = asyncHandler(async (req, res, next) => {
+  
+// })
