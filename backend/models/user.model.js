@@ -1,5 +1,7 @@
-import { Schema } from "mongoose";
+import Mongoose from "mongoose";
 import bcrypt from "bcrypt";
+
+const { Schema } = Mongoose;
 
 const userSchema = Schema(
 	{
@@ -14,7 +16,7 @@ const userSchema = Schema(
 		password: {
 			type: String,
 			required: true,
-    }
+		},
 	},
 	{ timestamps: true }
 );
