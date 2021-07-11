@@ -1,46 +1,39 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AppDispatch, AppThunk } from "..";
+import { login } from "./auth.slice";
 
 interface SignupState {
 	signingUp?: boolean;
-	signupSuccess: boolean;
-	signupError: string | null | undefined;
+	signupError: string | undefined;
 }
 
 const initialState: SignupState = {
 	signingUp: false,
-	signupError: null,
-	signupSuccess: false,
+	signupError: "",
 };
 
 const signupSlice = createSlice({
 	name: "[SIGNUP]",
 	initialState,
 	reducers: {
-		setSigninUp: (state) => {
-			state.signingUp = true;
-		},
-		setSignupSuccess: (state) => {
-			state.signingUp = false;
-			state.signupSuccess = true;
-			state.signupError = null;
+		setSigninUp: (state, { payload }: PayloadAction<boolean>) => {
+			state.signingUp = payload;
 		},
 		setSignupError: (state, { payload }: PayloadAction<string>) => {
 			state.signingUp = false;
-			state.signupSuccess = false;
 			state.signupError = payload;
 		},
 	},
 });
 
-const { setSigninUp, setSignupError, setSignupSuccess } = signupSlice.actions;
+const { setSigninUp, setSignupError } = signupSlice.actions;
 
 export const signup =
 	(data: { email: string; name: string; password: string }): AppThunk =>
 	async (dispatch: AppDispatch) => {
 		try {
-			dispatch(setSigninUp());
+			dispatch(setSigninUp(true));
 
 			const body = JSON.stringify(data);
 
@@ -52,7 +45,9 @@ export const signup =
 
 			await axios.post("/api/users", body, config);
 
-			dispatch(setSignupSuccess());
+			dispatch(setSigninUp(false));
+
+			dispatch(login({ email: data.email, password: data.password }));
 		} catch (error) {
 			dispatch(
 				setSignupError(
