@@ -2,6 +2,8 @@ import {
 	configureStore,
 	combineReducers,
 	getDefaultMiddleware,
+	ThunkAction,
+	Action,
 } from "@reduxjs/toolkit";
 import {
 	persistReducer,
@@ -40,3 +42,6 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

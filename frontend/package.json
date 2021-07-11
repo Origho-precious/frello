@@ -2,6 +2,7 @@
 	"name": "frello",
 	"version": "0.1.0",
 	"private": true,
+	"proxy": "http://localhost:5000",
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.6.0",
 		"@testing-library/jest-dom": "^5.11.4",
@@ -13,6 +14,8 @@
 		"@types/react-dom": "^17.0.0",
 		"@types/react-router-dom": "^5.1.7",
 		"@types/styled-components": "^5.1.10",
+		"axios": "^0.21.1",
+		"formik": "^2.2.9",
 		"postcss": "^8.2.8",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
