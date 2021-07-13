@@ -3,13 +3,11 @@ import Home from "./pages/home";
 
 const App = () => {
 	return (
-		<>
-			<BrowserRouter>
-				<Switch>
-					<Route exact path="/" component={Home} />
-				</Switch>
-			</BrowserRouter>
-		</>
+		<BrowserRouter>
+			<Switch>
+				<Route exact path="/" component={Home} />
+			</Switch>
+		</BrowserRouter>
 	);
 };
 
