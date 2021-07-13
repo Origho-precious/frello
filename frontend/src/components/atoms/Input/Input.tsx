@@ -9,6 +9,8 @@ interface IInputProps {
 	placeholder?: string;
 	style?: React.CSSProperties;
 	className?: string;
+	id?: string;
+	onBlur?: (e: any) => void;
 }
 
 const Input: React.FC<IInputProps> = ({ disabled, className, ...rest }) => {
@@ -31,7 +33,7 @@ const Element = styled.input`
 	}
 
 	&:focus {
-		background: #F7F7F7;
+		background: #f7f7f7;
 	}
 `;
 
