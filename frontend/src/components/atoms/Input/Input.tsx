@@ -11,22 +11,36 @@ interface IInputProps {
 	className?: string;
 	id?: string;
 	onBlur?: (e: any) => void;
+	label?: string;
 }
 
-const Input: React.FC<IInputProps> = ({ disabled, className, ...rest }) => {
+const Input: React.FC<IInputProps> = ({
+	disabled,
+	className,
+	id,
+	label,
+	...rest
+}) => {
 	return (
-		<Element
-			disabled={disabled}
-			{...rest}
-			className={`${className ? className : ""} text-sm block w-full`}
-		/>
+		<>
+			{label && (
+				<label htmlFor={id} className="mb-2 uppercase text-xs block font-bold">
+					{label}
+				</label>
+			)}
+			<Element
+				disabled={disabled}
+				{...rest}
+				className={`${className ? className : ""} text-sm block w-full`}
+			/>
+		</>
 	);
 };
 
 const Element = styled.input`
 	border-bottom: 2px solid #99b9ee;
 	outline: none;
-	padding: 0.4rem 0.5rem;
+	padding: 0.4rem 0;
 
 	&:hover {
 		border-bottom: 2px solid #99b9ee;
