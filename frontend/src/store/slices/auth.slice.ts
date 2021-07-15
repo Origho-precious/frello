@@ -57,11 +57,7 @@ export const login =
 				},
 			};
 
-			const res = await axios.post(
-				"/api/users/login",
-				body,
-				config
-			);
+			const res = await axios.post("/api/users/login", body, config);
 
 			dispatch(setLoginSuccess(res.data));
 		} catch (error) {
@@ -72,6 +68,10 @@ export const login =
 						: error?.message
 				)
 			);
+
+			setTimeout(() => {
+				dispatch(setLoginError(""));
+			}, 3000);
 		}
 	};
 
