@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Spinner from "../../composed/Spinner/Spinner";
 
 interface IButtonProps {
 	type: "submit" | "button";
@@ -7,6 +8,7 @@ interface IButtonProps {
 	className?: string;
 	children: React.ReactNode;
 	disabled?: boolean;
+	loading?: boolean;
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -16,6 +18,7 @@ const Button: React.FC<IButtonProps> = ({
 	style,
 	className,
 	children,
+	loading,
 }) => {
 	return (
 		<Container
@@ -27,7 +30,7 @@ const Button: React.FC<IButtonProps> = ({
 			type={type}
 			disabled={disabled}
 		>
-			{children}
+			{!loading ? children : <Spinner />}
 		</Container>
 	);
 };
