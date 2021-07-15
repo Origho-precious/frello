@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { login, selectAuthState } from "../../../store/slices/auth.slice";
 import Button from "../../atoms/Button/Button";
+import DefaultButton from "../../atoms/Button/DefaultButton";
 import Input from "../../atoms/Input/Input";
 
-const LoginForm = () => {
+interface ILoginFormProps {
+	gotoResetPassword: () => void;
+}
+
+const LoginForm: React.FC<ILoginFormProps> = ({ gotoResetPassword }) => {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -58,9 +62,9 @@ const LoginForm = () => {
 			</form>
 			<p className="mt-6 w-max mx-auto block text-center text-sm font-semibold text-primary-color">
 				Forgot password? &nbsp;
-				<Link className="text-black underline" to="/forgot-password">
+				<DefaultButton onClick={gotoResetPassword} type="button" className="text-black underline">
 					click here
-				</Link>
+				</DefaultButton>
 			</p>
 		</>
 	);
