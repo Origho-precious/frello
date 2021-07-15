@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AppThunk } from "..";
+import { AppDispatch, AppThunk, RootState } from "..";
 import { IUser } from "../../interfaces/IUser.interface";
 
 interface AuthState {
@@ -42,22 +42,28 @@ const authSlice = createSlice({
 
 const { setAuthenticating, setLoginError, setLoginSuccess } = authSlice.actions;
 
+export const selectAuthState = (state: RootState) => state.authReducer;
+
 export const login =
 	(data: { email: string; password: string }): AppThunk =>
-	async (dispatch) => {
+	async (dispatch: AppDispatch) => {
 		try {
 			dispatch(setAuthenticating());
 
 			const body = JSON.stringify(data);
 			const config = {
 				headers: {
-					"Content-type": "application/type",
+					"Content-type": "application/json",
 				},
 			};
 
-			const res: Partial<IUser> = await axios.post("/api/login", body, config);
+			const res = await axios.post(
+				"/api/users/login",
+				body,
+				config
+			);
 
-			dispatch(setLoginSuccess(res));
+			dispatch(setLoginSuccess(res.data));
 		} catch (error) {
 			dispatch(
 				setLoginError(
