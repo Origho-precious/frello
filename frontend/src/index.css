@@ -21,3 +21,13 @@ button:focus {
 .primary-color {
 	color: hsla(218, 100%, 42%, 1);
 }
+
+::-webkit-scrollbar {
+  width: 0.4rem;
+  height: 0rem;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsla(218, 100%, 42%, 1);
+}

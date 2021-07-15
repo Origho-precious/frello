@@ -12,6 +12,7 @@ interface IInputProps {
 	id?: string;
 	onBlur?: (e: any) => void;
 	label?: string;
+	errorMsg?: string;
 }
 
 const Input: React.FC<IInputProps> = ({
@@ -19,6 +20,7 @@ const Input: React.FC<IInputProps> = ({
 	className,
 	id,
 	label,
+	errorMsg,
 	...rest
 }) => {
 	return (
@@ -31,8 +33,17 @@ const Input: React.FC<IInputProps> = ({
 			<Element
 				disabled={disabled}
 				{...rest}
-				className={`${className ? className : ""} text-sm block w-full`}
+				className={`${
+					className ? className : ""
+				} text-sm font-semibold block w-full`}
 			/>
+			<div className="relative">
+				{errorMsg && (
+					<p className="absolute top-1 text-red-500 font-bold text-xs">
+						{errorMsg}
+					</p>
+				)}
+			</div>
 		</>
 	);
 };
