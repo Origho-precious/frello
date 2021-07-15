@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AppDispatch, AppThunk } from "..";
+import { AppDispatch, AppThunk, RootState } from "..";
 import { login } from "./auth.slice";
 
 interface SignupState {
@@ -28,6 +28,8 @@ const signupSlice = createSlice({
 });
 
 const { setSigninUp, setSignupError } = signupSlice.actions;
+
+export const selectSignupState = (state: RootState) => state.signupReducer
 
 export const signup =
 	(data: { email: string; name: string; password: string }): AppThunk =>
