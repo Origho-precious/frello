@@ -1,16 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import Button from "../../atoms/Button/Button";
 import Input from "../../atoms/Input/Input";
-import { signup } from "../../../store/slices/signup.slice";
+import { selectSignupState, signup } from "../../../store/slices/signup.slice";
 
 const SignupForm = () => {
 	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
+	const { signingUp, signupError } = useSelector(selectSignupState);
 
 	const submitHandler = (values: {
 		email: string;
@@ -50,9 +47,9 @@ const SignupForm = () => {
 		});
 
 	return (
-		<>
+		<div className="-mt-6">
 			<h2 className="text-2xl text-center">Create a free frello account</h2>
-			<form className="mt-10">
+			<form onSubmit={handleSubmit} className="mt-8">
 				<div className="w-full md:w-2/3 mx-auto">
 					<Input
 						label="Full name"
@@ -63,40 +60,66 @@ const SignupForm = () => {
 						onChange={handleChange}
 						onBlur={handleBlur}
 						placeholder="Enter your fullname"
+						errorMsg={errors.name && touched.name ? errors.name : undefined}
 					/>
 				</div>
 				<div className="my-8 w-full md:w-2/3 mx-auto">
 					<Input
-						onChange={(e) => setEmail(e.target.value)}
+						label="Email address"
+						id="email"
 						name="email"
 						type="email"
+						onChange={handleChange}
+						onBlur={handleBlur}
+						value={values.email}
 						placeholder="Enter your email address"
-						value={email}
+						errorMsg={errors.email && touched.email ? errors.email : undefined}
 					/>
 				</div>
 				<div className="w-full mb-8 md:w-2/3 mx-auto">
 					<Input
-						onChange={(e) => setPassword(e.target.value)}
+						label="Password"
+						id="password"
 						name="password"
 						type="password"
+						onChange={handleChange}
+						onBlur={handleBlur}
+						value={values.password}
 						placeholder="Choose a password"
-						value={password}
+						errorMsg={
+							errors.password && touched.password ? errors.password : undefined
+						}
 					/>
 				</div>
 				<div className="w-full md:w-2/3 mx-auto">
 					<Input
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						name="password"
+						label="Confirm password"
+						id="confirmPassword"
+						name="confirmPassword"
 						type="password"
+						value={values.confirmPassword}
+						onChange={handleChange}
+						onBlur={handleBlur}
 						placeholder="Confirm password"
-						value={confirmPassword}
+						errorMsg={
+							errors.confirmPassword && touched.confirmPassword
+								? errors.confirmPassword
+								: undefined
+						}
 					/>
 				</div>
-				<div className="mt-12 w-full md:w-2/3 mx-auto">
-					<Button type="button">Signup</Button>
+				{signupError && (
+					<p className="text-red-600 mt-4 -mb-3 w-full text-sm font-bold md:w-2/3 mx-auto text-center">
+						😪 {signupError}
+					</p>
+				)}
+				<div className="mt-8 w-full md:w-2/3 mx-auto">
+					<Button loading={signingUp} disabled={signingUp} type="submit">
+						Signup
+					</Button>
 				</div>
 			</form>
-		</>
+		</div>
 	);
 };
 
