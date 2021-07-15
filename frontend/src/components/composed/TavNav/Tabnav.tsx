@@ -8,7 +8,7 @@ interface ITabNav {
 
 const TabNav: React.FC<ITabNav> = ({ index, setIndex, options }) => {
 	return (
-		<TabWrapper className="grid grid-cols-2 gap-20 w-full">
+		<TabWrapper className={`grid grid-cols-${options.length} gap-10 w-full`}>
 			{options.map((option, idx) => (
 				<span
 					key={option}

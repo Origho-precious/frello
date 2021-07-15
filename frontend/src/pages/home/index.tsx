@@ -4,6 +4,7 @@ import { useSpring, animated } from "react-spring";
 import LoginForm from "../../components/composed/LoginForm/LoginForm";
 import SignupForm from "../../components/composed/SignupForm/SignupForm";
 import TabNav from "../../components/composed/TavNav/Tabnav";
+import ResetPassword from "../../components/composed/ResetPassword/ResetPassword";
 
 const Homepage = () => {
 	const [index, setIndex] = useState<number>(0);
@@ -54,23 +55,28 @@ const Homepage = () => {
 					</ul>
 				</div>
 			</section>
-			<section className="section-2 mt-16 flex flex-col md:w-1/2 lg:w-3/5">
+			<section className="section-2 mt-12 flex flex-col md:w-1/2 lg:w-3/5">
 				<article className="md:w-5/6 mb-12 form-section mx-auto">
 					<TabNav
 						setIndex={setIndex}
 						index={index}
-						options={["Login", "Signup"]}
+						options={["Login", "Signup", "Reset Password"]}
 					/>
-					<div className="mt-20">
+					<div className="mt-16">
 						<animated.div
 							style={{ ...styles, display: index !== 0 ? "none" : "block" }}
 						>
-							<LoginForm />
+							<LoginForm gotoResetPassword={() => setIndex(2)} />
 						</animated.div>
 						<animated.div
 							style={{ ...styles1, display: index !== 1 ? "none" : "block" }}
 						>
 							<SignupForm />
+						</animated.div>
+						<animated.div
+							style={{ ...styles1, display: index !== 2 ? "none" : "block" }}
+						>
+							<ResetPassword gotoLogin={() => setIndex(0)} />
 						</animated.div>
 					</div>
 				</article>
