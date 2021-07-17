@@ -149,7 +149,7 @@ export const sendResetLink =
 	};
 
 export const resetPassword =
-	(password: string): AppThunk =>
+	(token: string, password: string): AppThunk =>
 	async (dispatch: AppDispatch) => {
 		try {
 			dispatch(resettingPassword());
@@ -158,7 +158,7 @@ export const resetPassword =
 			const config = {
 				headers: {
 					"Content-type": "application/json",
-					Authorization: `Bearer`,
+					Authorization: `Bearer ${token}`,
 				},
 			};
 
