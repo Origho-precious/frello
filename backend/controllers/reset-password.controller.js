@@ -15,7 +15,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 		throw new Error(`User account associated with ${email} doesn't exists`);
 	} else {
 		const token = generateToken(email, true);
-		const mailMsg = `Click <a href="http://localhost:3000/reset-password?token=${token}&step=2">here</a> to reset your password`;
+		const mailMsg = `Click <a href="http://localhost:3000/reset-password?token=${token}">here</a> to reset your password`;
 
 		sendMail("Reset Password", email, mailMsg, () => {
 			res
