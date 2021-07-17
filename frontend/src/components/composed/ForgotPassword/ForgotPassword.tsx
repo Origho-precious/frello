@@ -1,34 +1,42 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	sendResetCode,
+	sendResetLink,
 	selectAuthState,
 } from "../../../store/slices/auth.slice";
 import Button from "../../atoms/Button/Button";
 import DefaultButton from "../../atoms/Button/DefaultButton";
 import Input from "../../atoms/Input/Input";
 
-interface ILoginResetPasswordProps {
+interface ILoginForgotPasswordProps {
 	gotoLogin: () => void;
 }
 
-const ResetPassword: React.FC<ILoginResetPasswordProps> = ({ gotoLogin }) => {
+const ForgotPassword: React.FC<ILoginForgotPasswordProps> = ({ gotoLogin }) => {
 	const dispatch = useDispatch();
 	// const [step, setStep] = useState(1);
 	const [email, setEmail] = useState("");
-	const { sendingResetCode, sendResetCodeError, sendResetCodeSuccess } =
+	const { sendingResetLink, sendResetLinkError, sendResetLinkSuccess } =
 		useSelector(selectAuthState);
 
 	const submitHandler = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
-		dispatch(sendResetCode(email));
+		dispatch(sendResetLink(email));
 	};
 
 	return (
 		<>
-			<h2 className="text-lg text-center">
-				Enter your email below, a validation code will be sent to you
-			</h2>
+			<h2 className="text-lg text-center">Enter your email below.</h2>
+			{!sendResetLinkSuccess && (
+				<p className="text-green-700 mt-4 -mb-3 w-full text-sm font-bold md:w-2/3 mx-auto text-center">
+					{sendResetLinkSuccess}
+				</p>
+			)}
+			{sendResetLinkError && (
+				<p className="text-red-600 mt-4 -mb-3 w-full text-sm font-bold md:w-2/3 mx-auto text-center">
+					😪 {sendResetLinkError}
+				</p>
+			)}
 			<form onSubmit={submitHandler} className="mt-10">
 				<div className="my-8 w-full md:w-2/3 mx-auto">
 					<Input
@@ -40,33 +48,29 @@ const ResetPassword: React.FC<ILoginResetPasswordProps> = ({ gotoLogin }) => {
 						value={email}
 					/>
 				</div>
-				{sendResetCodeError && (
-					<p className="text-red-600 mt-4 -mb-3 w-full text-sm font-bold md:w-2/3 mx-auto text-center">
-						😪 {sendResetCodeError}
-					</p>
-				)}
 				<div className="mt-10 w-full md:w-2/3 mx-auto">
 					<Button
-						disabled={sendingResetCode}
-						loading={sendingResetCode}
+						disabled={sendingResetLink}
+						loading={sendingResetLink}
 						type="submit"
 					>
-						Get Reset Code
+						Send
 					</Button>
 				</div>
 			</form>
-			<p className="mt-6 w-max mx-auto block text-center text-sm font-semibold text-primary-color">
-				Want to login instead? &nbsp;
+			<div className="flex items-center mt-6 w-max mx-auto text-center text-sm font-semibold text-primary-color">
+				<span className="block mr-3">Want to login instead?</span>
 				<DefaultButton
 					onClick={gotoLogin}
 					type="button"
-					className="text-black underline"
+					style={{ fontSize: "0.875rem" }}
+					className="text-primary-color text-sm underline"
 				>
 					Goto login
 				</DefaultButton>
-			</p>
+			</div>
 		</>
 	);
 };
 
-export default ResetPassword;
+export default ForgotPassword;
