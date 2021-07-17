@@ -8,9 +8,9 @@ interface AuthState {
 	authenticated: boolean;
 	profile: Partial<IUser>;
 	loginError?: string;
-	sendingResetCode?: boolean;
-	sendResetCodeSuccess?: string;
-	sendResetCodeError?: string;
+	sendingResetLink?: boolean;
+	sendResetLinkSuccess?: string;
+	sendResetLinkError?: string;
 	resettingPassword?: boolean;
 	resetPasswordError?: string;
 	resetPasswordSuccess?: string;
@@ -43,18 +43,18 @@ const authSlice = createSlice({
 			state.authenticating = false;
 			state.loginError = payload;
 		},
-		setSendingResetCode: (state) => {
-			state.sendingResetCode = true;
+		setSendingResetLink: (state) => {
+			state.sendingResetLink = true;
 		},
-		setSendResetCodeSuccess: (state, { payload }: PayloadAction<string>) => {
-			state.sendingResetCode = false;
-			state.sendResetCodeSuccess = payload;
-			state.sendResetCodeError = "";
+		setSendResetLinkSuccess: (state, { payload }: PayloadAction<string>) => {
+			state.sendingResetLink = false;
+			state.sendResetLinkSuccess = payload;
+			state.sendResetLinkError = "";
 		},
-		setSendResetCodeError: (state, { payload }: PayloadAction<string>) => {
-			state.sendingResetCode = false;
-			state.sendResetCodeError = payload;
-			state.sendResetCodeSuccess = "";
+		setSendResetLinkError: (state, { payload }: PayloadAction<string>) => {
+			state.sendingResetLink = false;
+			state.sendResetLinkError = payload;
+			state.sendResetLinkSuccess = "";
 		},
 		resettingPassword: (state) => {
 			state.resettingPassword = true;
@@ -78,9 +78,9 @@ const {
 	setLoginSuccess,
 	setResetPasswordError,
 	setResetPasswordSuccess,
-	setSendResetCodeError,
-	setSendResetCodeSuccess,
-	setSendingResetCode,
+	setSendResetLinkError,
+	setSendResetLinkSuccess,
+	setSendingResetLink,
 	resettingPassword,
 } = authSlice.actions;
 
@@ -117,11 +117,11 @@ export const login =
 		}
 	};
 
-export const sendResetCode =
+export const sendResetLink =
 	(email: string): AppThunk =>
 	async (dispatch: AppDispatch) => {
 		try {
-			dispatch(setSendingResetCode());
+			dispatch(setSendingResetLink());
 
 			const body = JSON.stringify(email);
 			const config = {
@@ -132,10 +132,10 @@ export const sendResetCode =
 
 			const res = await axios.post("/api/forgot-password", body, config);
 
-			dispatch(setSendResetCodeSuccess(res.data));
+			dispatch(setSendResetLinkSuccess(res.data));
 		} catch (error) {
 			dispatch(
-				setSendResetCodeError(
+				setSendResetLinkError(
 					error?.response?.data?.message
 						? error.response.data.message
 						: error?.message
@@ -143,7 +143,7 @@ export const sendResetCode =
 			);
 
 			setTimeout(() => {
-				dispatch(setSendResetCodeError(""));
+				dispatch(setSendResetLinkError(""));
 			}, 3000);
 		}
 	};

@@ -60,12 +60,17 @@ const LoginForm: React.FC<ILoginFormProps> = ({ gotoResetPassword }) => {
 					</Button>
 				</div>
 			</form>
-			<p className="mt-6 w-max mx-auto block text-center text-sm font-semibold text-primary-color">
-				Forgot password? &nbsp;
-				<DefaultButton onClick={gotoResetPassword} type="button" className="text-black underline">
-					click here
+			<div className="flex items-center mt-6 w-max mx-auto text-center text-sm font-semibold text-primary-color">
+				<span className="block mr-3">Forgot password?</span>
+				<DefaultButton
+					onClick={gotoResetPassword}
+					type="button"
+					style={{ fontSize: "0.875rem" }}
+					className="text-primary-color font-semibold text-sm underline"
+				>
+					Click here
 				</DefaultButton>
-			</p>
+			</div>
 		</>
 	);
 };

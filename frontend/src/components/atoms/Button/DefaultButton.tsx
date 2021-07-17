@@ -3,7 +3,7 @@ import styled from "styled-components";
 interface IDefaultButtonProps {
 	type: "submit" | "button";
 	onClick?: () => void;
-	style?: React.StyleHTMLAttributes<StyleSheet>;
+	style?: React.CSSProperties;
 	className?: string;
 	children: React.ReactNode;
 }
@@ -21,7 +21,7 @@ const DefaultButton: React.FC<IDefaultButtonProps> = ({
 			style={style}
 			className={`${
 				className && className
-			} w-max text-white text-base font-semibold flex flex-col items-center justify-center`}
+			} w-max text-base font-semibold flex flex-col items-center justify-center`}
 			type={type}
 		>
 			{children}
