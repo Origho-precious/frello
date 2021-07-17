@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 
-export const protect = asyncHandler(async (req, res, next) => {
+export const authResetToken = asyncHandler(async (req, res, next) => {
 	const token = req.headers.authorization;
 
 	if (token && token.startsWith("Bearer")) {
 		try {
 			const decode = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
 
-			req.resetId = decode.id;
+			req.userEmail = decode.id;
 
 			next();
 		} catch (error) {

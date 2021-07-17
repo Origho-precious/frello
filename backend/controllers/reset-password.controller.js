@@ -26,3 +26,26 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 		});
 	}
 });
+
+export const resetPassword = asyncHandler(async (req, res) => {
+	const { password } = req.body;
+	const email = req.userEmail;
+
+	if (!password) {
+		res.status(400);
+		throw new Error("New password not found");
+	} else {
+		const user = await User.findOne({ email });
+
+		if (user) {
+			user.password = password;
+
+			await user.save();
+
+			res.status(200).json("Password reset successful");
+		} else {
+			res.status(401);
+			throw new Error("User not found");
+		}
+	}
+});
