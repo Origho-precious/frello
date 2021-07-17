@@ -16,7 +16,7 @@ import {
 const ResetPassword = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const { resettingPassword, sendResetLinkError, sendResetLinkSuccess } =
+	const { resettingPassword, resetPasswordSuccess, resetPasswordError } =
 		useSelector(selectAuthState);
 
 	const token = history?.location?.search?.split("=")[1];
@@ -27,19 +27,24 @@ const ResetPassword = () => {
 		return () => {
 			dispatch(clearResetPasswordStates());
 		};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		!token && history.push("/");
 	}, [history, token]);
 
+	useEffect(() => {
+		setTimeout(() => {
+			resetPasswordSuccess && history.push("/");
+		}, 2500);
+	}, [history, resetPasswordSuccess]);
+
 	const submitHandler = (values: {
 		password: string;
 		confirmPassword: string;
 	}) => {
 		dispatch(resetPassword(token, values.password));
-		history.push("/");
 	};
 
 	const { errors, touched, handleBlur, handleChange, handleSubmit, values } =
@@ -101,14 +106,14 @@ const ResetPassword = () => {
 							}
 						/>
 					</div>
-					{sendResetLinkError && (
+					{resetPasswordError && (
 						<p className="text-red-600 mt-4 -mb-2 w-full text-sm font-bold md:w-2/3 mx-auto text-center">
-							😪 {sendResetLinkError}
+							😪 {resetPasswordError}
 						</p>
 					)}
-					{sendResetLinkSuccess && (
+					{resetPasswordSuccess && (
 						<p className="text-green-700 mt-4 -mb-2 w-full text-sm font-bold md:w-2/3 mx-auto text-center">
-							{sendResetLinkSuccess}
+							{resetPasswordSuccess}
 						</p>
 					)}
 					<div className="mt-10 w-full md:w-2/3 mx-auto">

@@ -92,7 +92,8 @@ const {
 	resettingPassword,
 } = authSlice.actions;
 
-export const {clearForgotPasswordStates, clearResetPasswordStates } = authSlice.actions;
+export const { clearForgotPasswordStates, clearResetPasswordStates } =
+	authSlice.actions;
 
 export const selectAuthState = (state: RootState) => state.authReducer;
 
@@ -133,14 +134,15 @@ export const sendResetLink =
 		try {
 			dispatch(setSendingResetLink());
 
-			const body = JSON.stringify(email);
+			const body = JSON.stringify({ email });
+
 			const config = {
 				headers: {
 					"Content-type": "application/json",
 				},
 			};
 
-			const res = await axios.post("/api/forgot-password", body, config);
+			const res = await axios.post("/api/auth/forgot-password", body, config);
 
 			dispatch(setSendResetLinkSuccess(res.data));
 		} catch (error) {
@@ -164,7 +166,7 @@ export const resetPassword =
 		try {
 			dispatch(resettingPassword());
 
-			const body = JSON.stringify(password);
+			const body = JSON.stringify({ password });
 			const config = {
 				headers: {
 					"Content-type": "application/json",
@@ -172,7 +174,7 @@ export const resetPassword =
 				},
 			};
 
-			const res = await axios.post("/api/reset-password", body, config);
+			const res = await axios.post("/api/auth/reset-password", body, config);
 
 			dispatch(setResetPasswordSuccess(res.data));
 		} catch (error) {

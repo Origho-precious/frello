@@ -14,7 +14,6 @@ interface ILoginForgotPasswordProps {
 
 const ForgotPassword: React.FC<ILoginForgotPasswordProps> = ({ gotoLogin }) => {
 	const dispatch = useDispatch();
-	// const [step, setStep] = useState(1);
 	const [email, setEmail] = useState("");
 	const { sendingResetLink, sendResetLinkError, sendResetLinkSuccess } =
 		useSelector(selectAuthState);
@@ -27,7 +26,7 @@ const ForgotPassword: React.FC<ILoginForgotPasswordProps> = ({ gotoLogin }) => {
 	return (
 		<>
 			<h2 className="text-lg text-center">Enter your email below.</h2>
-			{!sendResetLinkSuccess && (
+			{sendResetLinkSuccess && (
 				<p className="text-green-700 mt-4 -mb-3 w-full text-sm font-bold md:w-2/3 mx-auto text-center">
 					{sendResetLinkSuccess}
 				</p>
@@ -50,7 +49,7 @@ const ForgotPassword: React.FC<ILoginForgotPasswordProps> = ({ gotoLogin }) => {
 				</div>
 				<div className="mt-10 w-full md:w-2/3 mx-auto">
 					<Button
-						disabled={sendingResetLink}
+						disabled={sendingResetLink || !email}
 						loading={sendingResetLink}
 						type="submit"
 					>
