@@ -4,7 +4,7 @@ import { useSpring, animated } from "react-spring";
 import LoginForm from "../../components/composed/LoginForm/LoginForm";
 import SignupForm from "../../components/composed/SignupForm/SignupForm";
 import TabNav from "../../components/composed/TavNav/Tabnav";
-import ResetPassword from "../../components/composed/ResetPassword/ResetPassword";
+import ForgotPassword from "../../components/composed/ForgotPassword/ForgotPassword";
 
 const Homepage = () => {
 	const [index, setIndex] = useState<number>(0);
@@ -15,6 +15,10 @@ const Homepage = () => {
 
 	const styles1 = useSpring({
 		transform: index === 1 ? "scale(1, 1)" : "scale(0, 0)",
+	});
+
+	const styles2 = useSpring({
+		transform: index === 2 ? "scale(1, 1)" : "scale(0, 0)",
 	});
 
 	return (
@@ -66,7 +70,7 @@ const Homepage = () => {
 						<animated.div
 							style={{ ...styles, display: index !== 0 ? "none" : "block" }}
 						>
-							<LoginForm gotoResetPassword={() => setIndex(2)} />
+							<LoginForm gotoForgotPassword={() => setIndex(2)} />
 						</animated.div>
 						<animated.div
 							style={{ ...styles1, display: index !== 1 ? "none" : "block" }}
@@ -74,9 +78,9 @@ const Homepage = () => {
 							<SignupForm />
 						</animated.div>
 						<animated.div
-							style={{ ...styles1, display: index !== 2 ? "none" : "block" }}
+							style={{ ...styles2, display: index !== 2 ? "none" : "block" }}
 						>
-							<ResetPassword gotoLogin={() => setIndex(0)} />
+							<ForgotPassword gotoLogin={() => setIndex(0)} />
 						</animated.div>
 					</div>
 				</article>

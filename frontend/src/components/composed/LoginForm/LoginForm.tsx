@@ -6,10 +6,10 @@ import DefaultButton from "../../atoms/Button/DefaultButton";
 import Input from "../../atoms/Input/Input";
 
 interface ILoginFormProps {
-	gotoResetPassword: () => void;
+	gotoForgotPassword: () => void;
 }
 
-const LoginForm: React.FC<ILoginFormProps> = ({ gotoResetPassword }) => {
+const LoginForm: React.FC<ILoginFormProps> = ({ gotoForgotPassword }) => {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -63,7 +63,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({ gotoResetPassword }) => {
 			<div className="flex items-center mt-6 w-max mx-auto text-center text-sm font-semibold text-primary-color">
 				<span className="block mr-3">Forgot password?</span>
 				<DefaultButton
-					onClick={gotoResetPassword}
+					onClick={gotoForgotPassword}
 					type="button"
 					style={{ fontSize: "0.875rem" }}
 					className="text-primary-color font-semibold text-sm underline"
