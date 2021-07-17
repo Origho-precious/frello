@@ -69,6 +69,14 @@ const authSlice = createSlice({
 			state.resetPasswordError = payload;
 			state.resetPasswordSuccess = "";
 		},
+		clearForgotPasswordStates: (state) => {
+			state.sendResetLinkError = "";
+			state.sendResetLinkSuccess = "";
+		},
+		clearResetPasswordStates: (state) => {
+			state.resetPasswordError = "";
+			state.resetPasswordSuccess = "";
+		},
 	},
 });
 
@@ -83,6 +91,8 @@ const {
 	setSendingResetLink,
 	resettingPassword,
 } = authSlice.actions;
+
+export const {clearForgotPasswordStates, clearResetPasswordStates } = authSlice.actions;
 
 export const selectAuthState = (state: RootState) => state.authReducer;
 
@@ -144,7 +154,7 @@ export const sendResetLink =
 
 			setTimeout(() => {
 				dispatch(setSendResetLinkError(""));
-			}, 3000);
+			}, 4000);
 		}
 	};
 
@@ -176,7 +186,7 @@ export const resetPassword =
 
 			setTimeout(() => {
 				dispatch(setResetPasswordError(""));
-			}, 3000);
+			}, 4000);
 		}
 	};
 

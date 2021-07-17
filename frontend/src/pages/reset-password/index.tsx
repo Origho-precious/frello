@@ -6,7 +6,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../../components/atoms/Button/Button";
 import Input from "../../components/atoms/Input/Input";
-import { resetPassword, selectAuthState } from "../../store/slices/auth.slice";
+import {
+	clearForgotPasswordStates,
+	clearResetPasswordStates,
+	resetPassword,
+	selectAuthState,
+} from "../../store/slices/auth.slice";
 
 const ResetPassword = () => {
 	const history = useHistory();
@@ -17,6 +22,15 @@ const ResetPassword = () => {
 	const token = history?.location?.search?.split("=")[1];
 
 	useEffect(() => {
+		dispatch(clearForgotPasswordStates());
+
+		return () => {
+			dispatch(clearResetPasswordStates());
+		};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
 		!token && history.push("/");
 	}, [history, token]);
 
@@ -25,8 +39,7 @@ const ResetPassword = () => {
 		confirmPassword: string;
 	}) => {
 		dispatch(resetPassword(token, values.password));
-		console.log(values);
-		history.push('/')
+		history.push("/");
 	};
 
 	const { errors, touched, handleBlur, handleChange, handleSubmit, values } =
