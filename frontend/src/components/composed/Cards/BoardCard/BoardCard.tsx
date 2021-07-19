@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { truncateText } from "../../../../utils/truncateText";
 
 interface IBoardCardProps {
 	title: string;
@@ -10,11 +11,11 @@ const BoardCard: React.FC<IBoardCardProps> = ({ title, id }) => {
 	return (
 		<Container className="rounded-md">
 			<Link
-				style={{ minHeight: "8rem", width: "15rem" }}
-				className="block w-full px-4 pt-3"
+				style={{ minHeight: "7rem", width: "13rem" }}
+				className="block w-full px-3 py-2.5 text-sm"
 				to={`/boards/${id}`}
 			>
-				{title}
+				{truncateText(title, 50)}
 			</Link>
 		</Container>
 	);
