@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Tile from "../Tile/Tile";
+import Tile from "../Cards/Tile/Tile";
 import { ReactSortable } from "react-sortablejs";
 
 interface IBoardProps {
