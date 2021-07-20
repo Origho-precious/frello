@@ -20,6 +20,7 @@ const boardSchema = Schema(
 		members: {
 			type: [ObjectId],
 			required: false,
+			ref: "User",
 			default: [],
 		},
 		title: {

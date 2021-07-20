@@ -25,6 +25,12 @@ export const createBoard = asyncHandler(async (req, res) => {
 
 export const getUserBoards = asyncHandler(async (req, res) => {
 	const createdBy = req.user._id;
-	const boards = await Board.find({ createdBy }).populate("user", "id name");
+	const boards = await Board.find({ createdBy }).populate("createdBy members", "id name email");
+	res.status(200).json(boards);
+});
+
+export const getBoardsInvitedTo = asyncHandler(async (req, res) => {
+	const userId = req.user._id;
+	const boards = await Board.find({ members: userId }).populate("createdBy members", "id name email");
 	res.status(200).json(boards);
 });
