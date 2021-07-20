@@ -21,7 +21,6 @@ const boardSchema = Schema(
 			type: [ObjectId],
 			required: false,
 			default: [],
-			ref: "User",
 		},
 		title: {
 			type: String,
