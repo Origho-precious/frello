@@ -1,0 +1,41 @@
+import { Mongoose } from "mongoose";
+
+const { Schema, ObjectId } = Mongoose;
+
+const categorySchema = Schema(
+	{
+		title: { type: String, required: true },
+		list: { type: [String], required: false, default: [] },
+	},
+	{ timestamps: true }
+);
+
+const boardSchema = Schema(
+	{
+		createdBy: {
+			type: Schema.Types.ObjectId,
+			required: true,
+			ref: "User",
+		},
+		members: {
+			type: [ObjectId],
+			required: false,
+			default: [],
+			ref: "User",
+		},
+		title: {
+			type: String,
+			required: true,
+		},
+		categories: {
+			type: [categorySchema],
+			required: false,
+			default: [],
+		},
+	},
+	{ timestamps: true }
+);
+
+const Board = Mongoose.model("Board", boardSchema);
+
+export default Board;
