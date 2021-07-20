@@ -5,7 +5,7 @@ import connectDB from "./configs/db.js";
 import { errorHandler, notFound } from "./middlewares/error.middleware.js";
 import userRoutes from "./routes/user.route.js";
 import resetPasswordRoutes from "./routes/reset-password.js";
-import boardRoutes from "./routes/board.js";
+import boardRoutes from "./routes/board.route.js";
 
 dotenv.config();
 

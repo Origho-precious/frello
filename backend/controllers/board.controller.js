@@ -1,4 +1,4 @@
-import Board from "../models/board.model";
+import Board from "../models/board.model.js";
 import asyncHandler from "express-async-handler";
 
 export const createBoard = asyncHandler(async (req, res) => {
@@ -12,7 +12,13 @@ export const createBoard = asyncHandler(async (req, res) => {
 		const newBoard = await Board.create({ title, createdBy: userId });
 
 		res.status(201).json({
-			...newBoard,
+			_id: newBoard._id,
+			createdBy: newBoard.createdBy,
+			title: newBoard.title,
+			categories: newBoard.categories,
+			members: newBoard.members,
+			createdAt: newBoard.createdAt,
+			updatedAt: newBoard.updatedAt,
 		});
 	}
 });
