@@ -5,6 +5,7 @@ import connectDB from "./configs/db.js";
 import { errorHandler, notFound } from "./middlewares/error.middleware.js";
 import userRoutes from "./routes/user.route.js";
 import resetPasswordRoutes from "./routes/reset-password.js";
+import boardRoutes from "./routes/board.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", resetPasswordRoutes);
+app.use("/api/boards", boardRoutes);
 
 app.use("/", (_req, res) => {
 	res.send(`API running on port ${process.env.PORT}`);
