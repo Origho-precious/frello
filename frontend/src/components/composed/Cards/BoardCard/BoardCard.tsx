@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { truncateText } from "../../../../utils/truncateText";
+import { truncateText } from "../../../../utils/helperFunctions";
 
 interface IBoardCardProps {
-	title: string;
 	id: string;
+	title: string;
 }
 
 const BoardCard: React.FC<IBoardCardProps> = ({ title, id }) => {
 	return (
 		<Container className="rounded-md">
 			<Link
-				style={{ minHeight: "7rem", width: "13rem" }}
+				style={{ height: "7rem", width: "13rem" }}
 				className="block w-full px-3 py-2.5 text-sm"
 				to={`/boards/${id}`}
 			>
