@@ -10,7 +10,7 @@ const categorySchema = Schema(
 	{ timestamps: true }
 );
 
-const boardSchema = Schema(
+const boardSchema = new Schema(
 	{
 		createdBy: {
 			type: Schema.Types.ObjectId,

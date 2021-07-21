@@ -9,17 +9,8 @@ export const createBoard = asyncHandler(async (req, res) => {
 		res.status(400);
 		throw new Error("Board title not found!");
 	} else {
-		const newBoard = await Board.create({ title, createdBy: userId });
-
-		res.status(201).json({
-			_id: newBoard._id,
-			createdBy: newBoard.createdBy,
-			title: newBoard.title,
-			categories: newBoard.categories,
-			members: newBoard.members,
-			createdAt: newBoard.createdAt,
-			updatedAt: newBoard.updatedAt,
-		});
+		await Board.create({ title, createdBy: userId });
+		res.status(201).json('Board created successfully!');
 	}
 });
 
