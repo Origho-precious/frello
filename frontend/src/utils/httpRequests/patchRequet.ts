@@ -1,15 +1,16 @@
 import axios from "axios";
 import IHttpRequest from "../../interfaces/IHttpRequest.interface";
 
-const GetRequest = async <T>({
+const PatchRequest = async <T>({
 	url,
 	customHeaders,
+	body,
 	params,
 }: IHttpRequest): Promise<T> => {
 	try {
-		const { data } = await axios.get(url, {
-      headers: {
-        "Content-type": "application/json",
+		const { data } = await axios.patch(url, JSON.stringify(body), {
+			headers: {
+				"Content-type": "application/json",
 				...customHeaders,
 			},
 			params,
@@ -21,4 +22,4 @@ const GetRequest = async <T>({
 	}
 };
 
-export default GetRequest;
+export default PatchRequest;

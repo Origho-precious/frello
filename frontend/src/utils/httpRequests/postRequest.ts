@@ -1,15 +1,16 @@
 import axios from "axios";
 import IHttpRequest from "../../interfaces/IHttpRequest.interface";
 
-const GetRequest = async <T>({
+const PostRequest = async <T>({
 	url,
 	customHeaders,
+	body,
 	params,
 }: IHttpRequest): Promise<T> => {
 	try {
-		const { data } = await axios.get(url, {
-      headers: {
-        "Content-type": "application/json",
+		const { data } = await axios.post(url, JSON.stringify(body), {
+			headers: {
+				"Content-type": "application/json",
 				...customHeaders,
 			},
 			params,
@@ -21,4 +22,4 @@ const GetRequest = async <T>({
 	}
 };
 
-export default GetRequest;
+export default PostRequest;
