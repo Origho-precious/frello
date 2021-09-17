@@ -7,7 +7,7 @@ import GetRequest from "./httpRequests/getRequest";
 export class APIClient {
 	// private apiUrl: string;
 	// constructor() {
-	//   this.apiUrl = process.env.REACT_APP_URL as string;
+	//   this.apiUrl = process.env.REACT_APP_API_URL as string;
 	// }
 
 	async getUserCreatedBoards(token: string): Promise<IBoard[]> {
